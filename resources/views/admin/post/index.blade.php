@@ -10,7 +10,7 @@
 <div class="container-fluid">
     <div class="block-header">
         <h2>
-            <a href="{{route('post.create')}}"class="btn btn-primary">
+            <a href="{{route('blogpost.create')}}"class="btn btn-primary">
                 <i class="material-icons">add</i>
                 <span>Post Add</span>
             </a>
@@ -23,7 +23,7 @@
                 <div class="header">
                     <h2>
                        All Posts
-                       <span class="badge bg-blue">{{$posts->count()}}</span>
+                       {{-- <span class="badge bg-blue">{{$posts->count()}}</span> --}}
                     </h2>
                  
                 </div>
@@ -33,47 +33,40 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Category</th>
                                     <th>Title</th>
-                                    <th>Author</th>
-                                    <th>View</th>
-                                    <th>Is_Approved</th>
+                                    <th>Descritopn</th>
+                                    <th>Image</th>
                                     <th>status</th>
                                     <th>Created_at</th>
-                                    <th>Updated_Time</th>
+                                
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Category</th>
                                     <th>Title</th>
-                                    <th>Author</th>
-                                    <th>View</th>
-                                    <th>Is_Approved</th>
+                                    <th>Descritopn</th>
+                                    <th>Image</th>
                                     <th>status</th>
                                     <th>Created_at</th>
-                                    <th>Updated_Time</th>
+                                
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                            @foreach ($posts as $key=>$post)
+                            @foreach ($blogpost as $key=>$post)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{Str::limit($post->title,10)}}</td>
+                                <td>{{$post->category->category_name}}</td>
+                                <td>{{Str::limit($post->blog_title,10)}}</td>
+                                <td>{!! Str::limit($post->description,10) !!}</td>
                                 <td>
-                                    {{$post->user->name}}
+                                    <img src="{{asset($post->image)}}" width="60"height="40">
                                 </td>
-                                <td>
-                                    {{$post->view_count}}
-                                </td>
-                                <td>
-                                   @if($post->is_approved==true)
-                                        <span class="badge bg-blue">Approved</span>
-                                   @else
-                                   <span class="badge bg-pink">Panding</span>
-                                   @endif
-                                </td>
+                             
                                 <td>
                                     @if($post->status==true)
                                          <span class="badge bg-blue">Published</span>
@@ -82,19 +75,19 @@
                                     @endif
                                  </td>
                                 <td>{{$post->created_at->diffForHumans()}}</td>
-                                <td>{{$post->updated_at}}</td>
+                              
                                 <td>
                                    
-                                    <a href="{{route('post.show',$post->id)}}"class="btn btn-primary  waves-effect">
+                                    {{-- <a href="{{route('blogpost.show',$post->id)}}"class="btn btn-primary  waves-effect">
                                         <i class="material-icons">visibility</i>
-                                    </a>
-                                    <a href="{{route('post.edit',$post->id)}}"class="btn btn-info  waves-effect">
+                                    </a> --}}
+                                    <a href="{{route('blogpost.edit',$post->id)}}"class="btn btn-info  waves-effect">
                                         <i class="material-icons">edit</i>
                                     </a>
                                     <button class="btn btn-danger waves-effect"type="button"onclick="deletepost({{$post->id}})">
                                         <i class="material-icons">delete</i>
                                     </button>
-                                    <form id="delete-form-{{$post->id}}" action="{{route('post.destroy',$post->id)}}" method="post"style="display:none;">
+                                    <form id="delete-form-{{$post->id}}" action="{{route('blogpost.destroy',$post->id)}}" method="post"style="display:none;">
                                         @csrf
                                         @method('DELETE')
                                     </form>

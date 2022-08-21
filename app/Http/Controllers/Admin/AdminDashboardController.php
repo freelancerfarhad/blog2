@@ -5,9 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Tag;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Apost;
+use App\Models\blogPost;
 use App\Models\Category;
+use App\Models\HomeService;
+use App\Models\blogCategory;
 use Illuminate\Http\Request;
+use App\Models\contactMessage;
 use Illuminate\Support\Carbon;
+use App\Models\ambulanceMessage;
+use App\Models\ambulenceService;
+use App\Models\homeServiceMessage;
 use App\Http\Controllers\Controller;
 
 class AdminDashboardController extends Controller
@@ -19,30 +27,16 @@ class AdminDashboardController extends Controller
      */
     public function index()
     {
-        $posts=Post::all();
-        $popular_post=Post::withCount('comments')
-                ->withCount('comments')
-                ->withCount('favorite_to_user')
-                ->orderBy('view_count','desc')
-                ->orderBy('comments_count')
-                ->orderBy('favorite_to_user_count')
-                ->take(5)->get();//top  view and comment and like count
-      $TotalPandingPost=Post::where('is_approved',0)->count();//all panding post count
-         $AllViewCount=Post::sum('view_count');//all post ar view count
-          $author_count=User::where('role_id',2)->count();
-             $new_author_today=User::where('role_id',2)
-                                    ->whereDate('created_at',Carbon::today())->count();
-                $active_author=User::where('role_id',2)
-                                ->withCount('posts')
-                                ->withCount('comments')
-                                ->withCount('favorite_posts')
-                                ->orderBy('posts_count','desc')
-                                ->orderBy('comments_count','desc')
-                                ->orderBy('favorite_posts_count','desc')->get();    
-               $category_count=Category::all()->count();
-               $tag_count=Tag::all()->count();                               
-
-        return view('admin.dashboard',compact('posts','popular_post','TotalPandingPost','AllViewCount','author_count','new_author_today','active_author','category_count','tag_count'));
+                          
+        $post=blogPost::all()->count();
+        $postcat=blogCategory::all()->count();
+        $Homemgs=homeServiceMessage::all()->count();
+        $contactmsg=contactMessage::all()->count();
+        $emergencymsg=ambulanceMessage::all()->count();
+        $homecat=HomeService::all()->count();
+        $acategory=ambulenceService::all()->count();
+        $apost=Apost::all()->count();
+        return view('admin.dashboard',compact('post','postcat','Homemgs','contactmsg','emergencymsg','homecat','acategory','apost'));
     }
 
     /**

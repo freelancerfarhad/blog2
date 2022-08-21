@@ -49,71 +49,86 @@
                     </a>
                 </li>
 
-                <li class="{{Request::is('admin/tag*')?'active':''}}">
-                    <a href="{{route('tag.index')}}">
+                <li class="{{Request::is('admin/category*')?'active':''}}">
+                    <a href="{{route('category.index')}}">
                         <i class="material-icons">label</i>
-                        <span>Tag</span>
+                        <span>Ambulance Category</span>
                     </a>
                 </li>
 
-                <li class="{{Request::is('admin/category*')?'active':''}}">
-                    <a href="{{route('category.index')}}">
+                <li class="{{Request::is('admin/homeservice*')?'active':''}}">
+                    <a href="{{route('homeservice.index')}}">
                         <i class="material-icons">apps</i>
-                        <span>Category</span>
-                    </a>
-                </li>
-                <li class="{{Request::is('admin/post*')?'active':''}}">
-                    <a href="{{route('post.index')}}">
-                        <i class="material-icons">library_books</i>
-                        <span>Posts</span>
-                    </a>
-                </li>
-                <li class="{{Request::is('admin/panding')?'active':''}}">
-                    <a href="{{route('post.panding')}}">
-                        <i class="material-icons">library_books</i>
-                        <span>Panding</span>
-                    </a>
-                </li>
-                <li class="{{Request::is('admin/comment*')?'active':''}}">
-                    <a href="{{route('comment.index')}}">
-                        <i class="material-icons">comment</i>
-                        <span>Comment</span>
-                    </a>
-                </li>
-                <li class="{{Request::is('admin/subscriver*')?'active':''}}">
-                    <a href="{{route('admin.subscriver')}}">
-                        <i class="material-icons">subscriptions</i>
-                        <span>Subscripions</span>
-                    </a>
-                </li>
-                <li class="{{Request::is('admin/authors*')?'active':''}}">
-                    <a href="{{route('authors.index')}}">
-                        <i class="material-icons">account_circle</i>
-                        <span>All_Author</span>
+                        <span>Home Service Category</span>
                     </a>
                 </li>
                 <li>
-                    <div class="header">System</div>
+                    <div class="header">MESSAGE AND CONTCT</div>
                 </li>
-                <li class="{{Request::is('admin/setting')?'active':''}}">
-                    <a href="{{route('admin.setting')}}">
-                        <i class="material-icons">settings</i>
-                        <span>Settings</span>
+                <li class="{{Request::is('admin/message*')?'active':''}}">
+                    <a href="{{route('message.index')}}">
+                        <i class="material-icons">subscriptions</i>
+                        <span>Ambulance Contact</span>
                     </a>
                 </li>
-                <li class="{{Request::is('admin/logo*')?'active':''}}">
+                <li class="{{Request::is('admin/home-message*')?'active':''}}">
+                    <a href="{{route('home-message.index')}}">
+                        <i class="material-icons">account_circle</i>
+                        <span>Home Service Message</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="header">CONTACT-US</div>
+                </li>
+                <li class="{{Request::is('admin/contact')?'active':''}}">
+                    <a href="{{route('contact.index')}}">
+                        <i class="material-icons">settings</i>
+                        <span>Contact Message</span>
+                    </a>
+                </li>
+                <li class="{{Request::is('admin/multiple*')?'active':''}}">
+                    <a href="{{route('multiple.index')}}">
+                        <i class="material-icons">library_books</i>
+                        <span>Gallery</span>
+                    </a>
+                </li>
+                <li class="{{Request::is('admin/blogcat*')?'active':''}}">
+                    <a href="{{route('blogcat.index')}}">
+                        <i class="material-icons">comment</i>
+                        <span>Blog-Category</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="header">BLOG-AND-SERVICE</div>
+                </li>
+                <li class="{{Request::is('admin/blogpost*')?'active':''}}">
+                    <a href="{{route('blogpost.index')}}">
+                        <i class="material-icons">library_books</i>
+                        <span>Blog Post</span>
+                    </a>
+                </li>
+
+                <li class="{{Request::is('admin/apost*')?'active':''}}">
+                    <a href="{{route('apost.index')}}">
+                        <i class="material-icons">library_books</i>
+                        <span>Service Post</span>
+                    </a>
+                </li>
+
+        
+                {{-- <li class="{{Request::is('admin/logo*')?'active':''}}">
                     <a href="{{route('logo.index')}}">
                         <i class="material-icons">email</i>
                         <span>Change Logo</span>
                     </a>
-                </li>
-                <li class="{{Request::is('admin/social*')?'active':''}}">
+                </li> --}}
+                {{-- <li class="{{Request::is('admin/social*')?'active':''}}">
                     <a href="{{route('social.index')}}">
                         <i class="material-icons">email</i>
                         <span>Social Media</span>
                     </a>
                 </li>
-                <li>  
+                <li>   --}}
                 <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
@@ -126,10 +141,10 @@
                 </form>
                 </li>
 
-            @endif
+        @endif
 
             {{-- <li>admin dashboard adn autor dashboard seTup</li> --}}
-            @if(Request::is('author*'))
+     {{-- @if(Request::is('author*'))
             <li class="{{Request::is('author*')?'active':''}}">
                 <a href="{{route('author.dashboard')}}">
                     <i class="material-icons">dashboard</i>
@@ -169,7 +184,7 @@
                  @csrf
              </form>
             </li>
-            @endif
+            @endif --}}
           
  
         </ul>

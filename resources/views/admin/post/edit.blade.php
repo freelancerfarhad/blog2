@@ -15,9 +15,10 @@
 
     <div class="container-fluid">
       
-        <form action="{{route('post.update',$post->id)}}" method="post"enctype="multipart/form-data">
+        <form action="{{route('blogpost.update',$posts->id)}}" method="post"enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            
         <!-- Vertical Layout | With Floating Label -->
         <div class="row clearfix">
             <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
@@ -33,7 +34,7 @@
                         
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" id="name" class="form-control"name="title"value="{{$post->title}}">
+                                    <input type="text" id="name" class="form-control"name="blog_title"value="{{$posts->blog_title}}">
                                     <label class="form-label"for="name">Title</label>
                                 </div>
                             </div>
@@ -41,20 +42,22 @@
                             <div class="form-group form-float">
                                 <div class="form-line">
                                     <label class="">Futures Image </label>
-                                    <img src='{{asset("public/storage/post/$post->thumbnail")}}' alt="images"With="60"height="50">
-                                    <input type="file" id="image" class="form-control"name="thumbnail">
+
+                                    <input type="hidden"name="old_image"value="{{$posts->image}}">
+                                    <img src="{{asset($posts->image)}}" width="60"height="40">
+                                    <input type="file" id="image" class="form-control"name="image">
                                     
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="form-line">
-                                 
-                                    <input type="checkbox" name="status" value="1"id="publish"class="filled-in"{{$post->status==true ? 'checked':''}}>
-                                    <label for="publish">Publish</label>
-
-                                    
-                                </div>
+                                <label for="name">Brand Status</label>
+                                <label class="ckbox">
+                                    <select name="status" class="form-control">
+                                        <option value="1"@if($posts->status == 1) selected @endif>Active</option>
+                                        <option value="0"@if($posts->status == 0) selected @endif>Inactive</option>
+                                    </select>
+                                  </label>
                             </div>
                             
                        
@@ -65,37 +68,32 @@
                 <div class="card">
                     <div class="header">
                         <h2>
-                           CATEGORY And Tags
+                           CATEGORY 
                         </h2>
                     
                     </div>
                     <div class="body">
-                        {{-- {{$error->has('tags') ? 'focused error':''}} --}}
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <label class=""for="category">Select Category</label>
-                                    <select name="category[]" id="category"class="form-control show-tick"data-live-search="true"multiple>
-                                        @foreach ($categories as $category)
-                                            <option @foreach ($post->categories as $postcategory){{$postcategory->id==$category->id ? 'selected' : ''}} @endforeach
-                                            value="{{$category->id}}"> {{ $category->name }} </option>
+                        
+                        <div class="form-group">
+                            <div class="form-line">
+                                <label class=""for="category">Select Category</label>
+                               
+                                <select name="category_id" id="divistion_id"class="form-control">
+                                    <option value="">Select Category Name</option>
+                                    @foreach ($pcat as $pcat)
+                                        <option value="{{$pcat->id}}"
+                                          @if($pcat->id==$posts->category_id)
+                                          selected @endif
+                                          >{{$pcat->category_name}}</option>
                                         @endforeach
-                                    </select>
-                                </div>
+                                  </select>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <label class=""for="tags">Select Tags</label>
-                                    <select name="tags[]" id="tags"class="form-control show-tick"data-live-search="true"multiple>
-                                        @foreach ($tags as $tag)
-                                            <option @foreach ($post->tags as $posttag){{$posttag->id==$tag->id ? 'selected' : ''}} @endforeach value="{{$tag->id}}"> {{ $tag->name }} </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
+                         
 
                             <br>
-                            <a href="{{route('post.index')}}" class="btn btn-danger m-t-15 waves-effect">BACK</a>
+                            <a href="{{route('blogpost.index')}}" class="btn btn-danger m-t-15 waves-effect">BACK</a>
                             <button type="submit" class="btn btn-primary m-t-15 waves-effect"> Publish</button>
                        
                     </div>
@@ -115,8 +113,8 @@
                     </div>
                     <div class="body">
                        
-                     <textarea name="body" id="tinymce">
-                        {{$post->body}}
+                     <textarea name="description" id="tinymce">
+                        {{$posts->description}}
                      </textarea>
                     </div>
                 </div>

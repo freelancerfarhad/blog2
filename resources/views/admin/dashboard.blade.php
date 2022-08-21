@@ -18,7 +18,7 @@
                 </div>
                 <div class="content">
                     <div class="text">TOTAL POSTS</div>
-                    <div class="number count-to" data-from="0" data-to="{{$posts->count()}}" data-speed="15" data-fresh-interval="20"></div>
+                    <div class="number count-to" data-from="0" data-to="{{$post}}" data-speed="15" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>
@@ -28,8 +28,8 @@
                     <i class="material-icons">favorite</i>
                 </div>
                 <div class="content">
-                    <div class="text">TOTAL FAVORITE</div>
-                    <div class="number count-to" data-from="0" data-to="{{Auth::user()->favorite_posts()->count()}}" data-speed="1000" data-fresh-interval="20"></div>
+                    <div class="text">SERVICE MESSAGE</div>
+                    <div class="number count-to" data-from="0" data-to="{{$Homemgs}}" data-speed="1000" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>
@@ -39,8 +39,8 @@
                     <i class="material-icons">library_books</i>
                 </div>
                 <div class="content">
-                    <div class="text">PANDING POSTS</div>
-                    <div class="number count-to" data-from="0" data-to="{{$TotalPandingPost}}" data-speed="1000" data-fresh-interval="20"></div>
+                    <div class="text">TOTAL CONTACT</div>
+                    <div class="number count-to" data-from="0" data-to="{{$contactmsg}}" data-speed="1000" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>
@@ -50,8 +50,8 @@
                     <i class="material-icons">person_add</i>
                 </div>
                 <div class="content">
-                    <div class="text">VIEW</div>
-                    <div class="number count-to" data-from="0" data-to="{{$AllViewCount}}" data-speed="1000" data-fresh-interval="20"></div>
+                    <div class="text">EMERGENCY MSG</div>
+                    <div class="number count-to" data-from="0" data-to="{{$emergencymsg}}" data-speed="1000" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>
@@ -59,14 +59,14 @@
 
        <!-- Widgets -->
        <div class="row clearfix">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
             <div class="info-box bg-orange hover-zoom-effect">
                 <div class="icon">
                     <i class="material-icons">apps</i>
                 </div>
                 <div class="content">
                     <div class="text">CATEGORIES</div>
-                    <div class="number count-to" data-from="0" data-to="{{$category_count}}" data-speed="15" data-fresh-interval="20"></div>
+                    <div class="number count-to" data-from="0" data-to="{{$postcat}}" data-speed="15" data-fresh-interval="20"></div>
                 </div>
             </div>
             <div class="info-box bg-blue hover-zoom-effect">
@@ -74,8 +74,8 @@
                     <i class="material-icons">labels</i>
                 </div>
                 <div class="content">
-                    <div class="text">Tags</div>
-                    <div class="number count-to" data-from="0" data-to="{{$tag_count}}" data-speed="15" data-fresh-interval="20"></div>
+                    <div class="text">SERVICE CATEGORY</div>
+                    <div class="number count-to" data-from="0" data-to="{{$homecat}}" data-speed="15" data-fresh-interval="20"></div>
                 </div>
             </div>
             <div class="info-box bg-blue-grey hover-zoom-effect">
@@ -83,8 +83,8 @@
                     <i class="material-icons">account_circle</i>
                 </div>
                 <div class="content">
-                    <div class="text">Author</div>
-                    <div class="number count-to" data-from="0" data-to="{{$author_count}}" data-speed="15" data-fresh-interval="20"></div>
+                    <div class="text">EMERGENCY CATEGORY</div>
+                    <div class="number count-to" data-from="0" data-to="{{$acategory}}" data-speed="15" data-fresh-interval="20"></div>
                 </div>
             </div>
             <div class="info-box bg-purple hover-zoom-effect">
@@ -93,11 +93,11 @@
                 </div>
                 <div class="content">
                     <div class="text">Today Author</div>
-                    <div class="number count-to" data-from="0" data-to="{{$new_author_today}}" data-speed="15" data-fresh-interval="20"></div>
+                    <div class="number count-to" data-from="0" data-to="{{$apost}}" data-speed="15" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+        {{-- <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="header">
                         <h2>Top Popular Posts</h2>
@@ -118,36 +118,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($popular_post as $key=>$popular)
-                                        <tr>
-                                            <td>{{$key + 1}}</td>
-                                            <td>{{Str::limit($popular->title,'15')}}</td>
-                                            <td>{{$popular->user->name}}</td>
-                                            <td>{{$popular->view_count}}</td>
-                                            <td>{{$popular->favorite_to_user_count}}</td>
-                                            <td>{{$popular->comments_count}}</td>
-                                            <td>
-                                                @if ($popular->status==true)
-                                                    <span class="bg-green">Published</span>
-                                                @else
-                                                <span class="bg-red">Panding</span>
-                                                
-                                                @endif    
-                                            </td>
-                                            <td>
-                                                <a href="{{route('post.favorite',$popular->slug)}}"class="btn btn-sm btn-primary"target="_blank">View</a>
-                                            </td>
-                                            
-
-                                        </tr>
-                                    @endforeach
+                                    
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
-        </div>
+        </div> --}}
 
     </div>
     <!-- #END# Widgets -->
@@ -173,7 +151,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($active_author as $key=>$activeuser)
+                                {{-- @foreach ($active_author as $key=>$activeuser)
                                     
                          
                                 <tr>
@@ -183,7 +161,7 @@
                                     <td>{{$activeuser->comments_count}}</td>
                                     <td>{{$activeuser->favorite_posts_count}}</td>
                                 </tr>
-                                @endforeach
+                                @endforeach --}}
                             </tbody>
                         </table>
                     </div>

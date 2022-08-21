@@ -15,7 +15,7 @@
 
     <div class="container-fluid">
       
-        <form action="{{route('post.store')}}" method="post"enctype="multipart/form-data">
+        <form action="{{route('blogpost.store')}}" method="post"enctype="multipart/form-data">
             @csrf
         <!-- Vertical Layout | With Floating Label -->
         <div class="row clearfix">
@@ -32,7 +32,7 @@
                         
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" id="name" class="form-control"name="title">
+                                    <input type="text" id="name" class="form-control"name="blog_title">
                                     <label class="form-label"for="name">Title</label>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                             <div class="form-group form-float">
                                 <div class="form-line">
                                     <label class="">Futures Image </label>
-                                    <input type="file" id="image" class="form-control"name="thumbnail">
+                                    <input type="file" id="image" class="form-control"name="image">
                                     
                                 </div>
                             </div>
@@ -48,9 +48,10 @@
                             <div class="form-group">
                                 <div class="form-line">
                                  
-                                    <input type="checkbox" name="status" value="1"id="publish"class="filled-in">
-                                    <label for="publish">Publish</label>
-
+                                   <select name="status" class="form-control">
+                                    <option value="1">Active</option>
+                                    <option value="0">In-Active</option>
+                                   </select>
                                     
                                 </div>
                             </div>
@@ -72,27 +73,18 @@
                             <div class="form-group">
                                 <div class="form-line">
                                     <label class=""for="category">Select Category</label>
-                                    <select name="category[]" id="category"class="form-control show-tick"data-live-search="true"multiple>
-                                        @foreach ($categories as $category)
-                                            <option value="{{$category->id}}"> {{ $category->name }} </option>
+                                    <select name="category_id" id="category"class="form-control show-tick"data-live-search="true">
+                                        @foreach ($category as $category)
+                                            <option value="{{$category->id}}"> {{ $category->category_name }} </option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <label class=""for="tags">Select Tags</label>
-                                    <select name="tags[]" id="tags"class="form-control show-tick"data-live-search="true"multiple>
-                                        @foreach ($tags as $tag)
-                                            <option value="{{$tag->id}}"> {{ $tag->name }} </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
+                         
 
                             <br>
-                            <a href="{{route('post.index')}}" class="btn btn-danger m-t-15 waves-effect">BACK</a>
+                            <a href="{{route('blogpost.index')}}" class="btn btn-danger m-t-15 waves-effect">BACK</a>
                             <button type="submit" class="btn btn-primary m-t-15 waves-effect"> Publish</button>
                        
                     </div>
@@ -112,7 +104,7 @@
                     </div>
                     <div class="body">
                        
-                     <textarea name="body" id="tinymce"></textarea>
+                     <textarea name="description" id="tinymce"></textarea>
                     </div>
                 </div>
             </div>
